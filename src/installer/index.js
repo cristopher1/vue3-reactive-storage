@@ -18,9 +18,8 @@ export class ReactiveLocalStorageInstaller {
    *
    * @param {App<Element>} app Instance of the app created by createApp.
    * @param {object} options Plugin's configuration.
-   * @param {string} [options.prefix] Defines the reactive storage used. When
-   *   this parameter is false, it is used a reactive object to save the data;
-   *   otherwise, it is used a ref object. By default is true.
+   * @param {string} [options.prefix] String used to create the key in
+   *   LocalStorage, SessionStorage or others objects.
    * @param {object} [options.webStorage] An object that implements the Storage
    *   interface, for example LocalStorage, SessionStorage, other.
    * @param {object} [options.reactiveStorage] An reactivity object, for example

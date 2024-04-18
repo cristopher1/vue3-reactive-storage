@@ -16,6 +16,12 @@ export class ReactiveWebStorage {
     this.#reactiveStorageAdapter = reactiveStorageAdapter
   }
 
+  /**
+   * Key used in webStorage
+   *
+   * @param {string} key The key used by reactiveWebStorage
+   * @returns {string} The key used by webStorage
+   */
   obtainWebStorageKey(key) {
     return this.#prefix !== '' ? `${this.#prefix}-${key}` : key
   }
@@ -26,9 +32,23 @@ export class ReactiveWebStorage {
     return prefix === this.#prefix
   }
 
+  /**
+   * Key used in reactiveWebStorage
+   *
+   * @param {string} key The key used by reactiveWebStorage
+   * @returns {string} The key used by reactiveStorageAdapter
+   */
   obtainReactiveStorageAdapterKey(key) {
     const keyElements = key.split('-')
     return keyElements.at(-1)
+  }
+
+  get reactiveStorageAdapter() {
+    return this.#reactiveStorageAdapter
+  }
+
+  get reactiveStorage() {
+    return this.#reactiveStorageAdapter.reactiveStorage
   }
 
   get prefix() {
@@ -36,10 +56,9 @@ export class ReactiveWebStorage {
   }
 
   /**
-   * Obtains the number of elements saved in reactiveLocalStorage.
+   * Obtains the number of elements saved in reactiveWebStorage.
    *
-   * @returns {number} Number of elements saved in reactiveLocalStorage.
-   * @override
+   * @returns {number} Number of elements saved in reactiveWebStorage.
    * @readonly
    */
   get length() {
@@ -47,16 +66,21 @@ export class ReactiveWebStorage {
   }
 
   /**
-   * Returns the key in nth position into reactiveLocalStorage.
+   * Returns the key in nth position into reactiveWebStorage.
    *
-   * @param {number} index The index of a key in the reactiveLocalStorage.
+   * @param {number} index The index of a key in the reactiveWebStorage.
    * @returns {string} The key in nth position.
-   * @override
    */
   key(index) {
     return super.key(index)
   }
 
+  /**
+   * Returns the parsed key's value saved into reactiveWebStorage.
+   *
+   * @param {string} key A key saved into reactiveWebStorage.
+   * @returns {string | null} The key's value.
+   */
   getItem(key) {
     let value = this.#reactiveStorageAdapter.getItem(key)
     if (!value) {
@@ -69,6 +93,12 @@ export class ReactiveWebStorage {
     return value
   }
 
+  /**
+   * Saves the pair key/value into reactiveWebStorage.
+   *
+   * @param {string} key A key saved into reactiveWebStorage.
+   * @param {string} item The key's value to save.
+   */
   setItem(key, item) {
     try {
       const webStorageKey = this.obtainWebStorageKey(key)
@@ -80,10 +110,9 @@ export class ReactiveWebStorage {
   }
 
   /**
-   * Removes the pair key/value from reactiveLocalStorage.
+   * Removes the pair key/value from reactiveWebStorage.
    *
-   * @param {string} key The key to remove from reactiveLocalStorage.
-   * @override
+   * @param {string} key The key to remove from reactiveWebStorage.
    */
   removeItem(key) {
     const webStorageKey = this.obtainWebStorageKey(key)
@@ -91,11 +120,7 @@ export class ReactiveWebStorage {
     this.#reactiveStorageAdapter.removeItem(key)
   }
 
-  /**
-   * Removes all pairs key/value into reactiveLocalStorage.
-   *
-   * @override
-   */
+  /** Removes all pairs key/value into reactiveWebStorage. */
   clear() {
     const length = this.#reactiveStorageAdapter.length()
     for (let i = 0; i < length; i++) {
@@ -106,6 +131,11 @@ export class ReactiveWebStorage {
     this.#reactiveStorageAdapter.clear()
   }
 
+  /**
+   * This method must be used into listener object that listens an event. Sets
+   * the data from localStorage into reactiveLocalStorage when the listened
+   * event is fired.
+   */
   loadDataFromWebStorage() {
     const length = this.#webStorage.length
     for (let index = 0; index < length; ++index) {
