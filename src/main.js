@@ -1,5 +1,4 @@
-import { Installer } from './installer'
-import { getGreeting, greet } from './greeting'
+import { ReactiveLocalStorageInstaller } from './installer'
 
 /**
  * Creates an installer used to install this plugin.
@@ -7,5 +6,5 @@ import { getGreeting, greet } from './greeting'
  * @returns {object} The installer object that will install this plugin.
  */
 export function createInstaller() {
-  return new Installer(getGreeting, greet)
+  return new ReactiveLocalStorageInstaller()
 }
