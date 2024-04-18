@@ -89,8 +89,4 @@ export class ReactiveWebStorage {
     }
     this.#reactiveStorageAdapter.clear()
   }
-
-  executeFunction(func) {
-    func(this.#webStorage, this.#reactiveStorageAdapter)
-  }
 }
