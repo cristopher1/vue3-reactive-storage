@@ -5,9 +5,12 @@ export class ReactiveStorageAdapter {
   #reactiveStorage
 
   constructor(reactiveStorage) {
-    if (!isReactive(reactiveStorage) && !isRef(reactiveStorage)) {
+    if (
+      !reactiveStorage ||
+      (!isReactive(reactiveStorage) && !isRef(reactiveStorage))
+    ) {
       throw new ReactiveStorageError(
-        '"reactiveStorage" parameter must be a reactive or ref object',
+        '"reactiveStorage" object must be a reactive or ref object',
       )
     }
     this.#reactiveStorage = reactiveStorage

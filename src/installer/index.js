@@ -3,6 +3,12 @@
 import { ReactiveWebStorageFactory } from '../storage/ReactiveWebStorageFactory.js'
 
 export class ReactiveLocalStorageInstaller {
+  #addLoadDataFromWebStorage(window, reactiveWebStorage) {
+    window.addEventListener('load', () => {
+      reactiveWebStorage.loadDataFromWebStorage()
+    })
+  }
+
   #addReactiveWebStorageToApp(app, reactiveWebStorage) {
     app.config.globalProperties.$reactiveWebStorage = reactiveWebStorage
   }
@@ -21,7 +27,12 @@ export class ReactiveLocalStorageInstaller {
    *   an ref or reactive object.
    */
   install(app, options) {
-    const { prefix = '', webStorage, reactiveStorage } = options
+    const {
+      prefix = '',
+      webStorage,
+      reactiveStorage,
+      loadDataFromWebStorage = true,
+    } = options
 
     const reactiveWebStorage =
       ReactiveWebStorageFactory.createReactiveWebStorage(
@@ -29,6 +40,10 @@ export class ReactiveLocalStorageInstaller {
         webStorage,
         reactiveStorage,
       )
+
+    if (loadDataFromWebStorage) {
+      this.#addLoadDataFromWebStorage(window, reactiveWebStorage)
+    }
 
     this.#addReactiveWebStorageToApp(app, reactiveWebStorage)
   }

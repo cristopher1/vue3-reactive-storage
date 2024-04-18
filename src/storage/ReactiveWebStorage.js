@@ -6,6 +6,11 @@ export class ReactiveWebStorage {
   #reactiveStorageAdapter
 
   constructor(prefix, webStorage, reactiveStorageAdapter) {
+    if (!webStorage || !(webStorage instanceof Storage)) {
+      throw new ReactiveStorageError(
+        'The "webStorage" object must implement the Storage interface',
+      )
+    }
     this.#prefix = prefix
     this.#webStorage = webStorage
     this.#reactiveStorageAdapter = reactiveStorageAdapter
@@ -13,6 +18,17 @@ export class ReactiveWebStorage {
 
   obtainWebStorageKey(key) {
     return this.#prefix !== '' ? `${this.#prefix}-${key}` : key
+  }
+
+  #isWebStorageKey(key) {
+    const keyElements = key.split('-')
+    const prefix = keyElements[0]
+    return prefix === this.#prefix
+  }
+
+  obtainReactiveStorageAdapterKey(key) {
+    const keyElements = key.split('-')
+    return keyElements.at(-1)
   }
 
   get prefix() {
@@ -88,5 +104,18 @@ export class ReactiveWebStorage {
       this.#webStorage.removeItem(webStorageKey)
     }
     this.#reactiveStorageAdapter.clear()
+  }
+
+  loadDataFromWebStorage() {
+    const length = this.#webStorage.length
+    for (let index = 0; index < length; ++index) {
+      const webStorageKey = this.#webStorage.key(index)
+      if (this.#isWebStorageKey(webStorageKey)) {
+        const reactiveStorageAdapterKey =
+          this.obtainReactiveStorageAdapterKey(webStorageKey)
+        const value = this.#webStorage.getItem(reactiveStorageAdapterKey)
+        super.setItem(reactiveStorageAdapterKey, value)
+      }
+    }
   }
 }
