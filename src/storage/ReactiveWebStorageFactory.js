@@ -1,4 +1,4 @@
-import { ReactiveStorage } from './ReactiveStorage.js'
+import { ReactiveStorageAdapter } from './ReactiveStorageAdapter.js'
 import { ReactiveWebStorage } from './ReactiveWebStorage.js'
 
 export class ReactiveWebStorageFactory {
@@ -6,7 +6,7 @@ export class ReactiveWebStorageFactory {
     return new ReactiveWebStorage(
       prefix,
       webStorage,
-      new ReactiveStorage(reactiveStorage),
+      new ReactiveStorageAdapter(reactiveStorage),
     )
   }
 }

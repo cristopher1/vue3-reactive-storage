@@ -1,7 +1,7 @@
-import { ReactiveStorageError } from './Error'
+import { ReactiveStorageError } from './Error.js'
 import { isReactive, isRef } from 'vue'
 
-export class ReactiveStorage {
+export class ReactiveStorageAdapter {
   #reactiveStorage
 
   constructor(reactiveStorage) {

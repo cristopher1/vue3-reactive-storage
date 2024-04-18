@@ -3,12 +3,12 @@ import { ReactiveStorageError } from './Error.js'
 export class ReactiveWebStorage {
   #prefix
   #webStorage
-  #reactiveStorage
+  #reactiveStorageAdapter
 
-  constructor(prefix, webStorage, reactiveStorage) {
+  constructor(prefix, webStorage, reactiveStorageAdapter) {
     this.#prefix = prefix
     this.#webStorage = webStorage
-    this.#reactiveStorage = reactiveStorage
+    this.#reactiveStorageAdapter = reactiveStorageAdapter
   }
 
   obtainWebStorageKey(key) {
@@ -42,7 +42,7 @@ export class ReactiveWebStorage {
   }
 
   getItem(key) {
-    let value = this.#reactiveStorage.getItem(key)
+    let value = this.#reactiveStorageAdapter.getItem(key)
     if (!value) {
       const webStorageKey = this.obtainWebStorageKey(key)
       value = this.#webStorage.getItem(webStorageKey)
@@ -57,7 +57,7 @@ export class ReactiveWebStorage {
     try {
       const webStorageKey = this.obtainWebStorageKey(key)
       this.#webStorage.setItem(webStorageKey, item)
-      this.#reactiveStorage.setItem(key, item)
+      this.#reactiveStorageAdapter.setItem(key, item)
     } catch (err) {
       throw new ReactiveStorageError(err.message, { cause: err })
     }
@@ -72,7 +72,7 @@ export class ReactiveWebStorage {
   removeItem(key) {
     const webStorageKey = this.obtainWebStorageKey(key)
     this.#webStorage.removeItem(webStorageKey)
-    this.#reactiveStorage.removeItem(key)
+    this.#reactiveStorageAdapter.removeItem(key)
   }
 
   /**
@@ -81,12 +81,16 @@ export class ReactiveWebStorage {
    * @override
    */
   clear() {
-    const length = this.#reactiveStorage.length()
+    const length = this.#reactiveStorageAdapter.length()
     for (let i = 0; i < length; i++) {
-      const key = this.#reactiveStorage.key(i)
+      const key = this.#reactiveStorageAdapter.key(i)
       const webStorageKey = this.obtainWebStorageKey(key)
       this.#webStorage.removeItem(webStorageKey)
     }
-    this.#reactiveStorage.clear()
+    this.#reactiveStorageAdapter.clear()
+  }
+
+  executeFunction(func) {
+    func(this.#webStorage, this.#reactiveStorageAdapter)
   }
 }
