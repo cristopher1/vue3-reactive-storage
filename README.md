@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to vue3-reactive-storage 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.0.1-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/cristopher1/vue3-reactive-storage#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
@@ -24,7 +24,7 @@ A Vue3 plugin to use reactivity with object that implements the Storage interfac
 - [How to use?](#how-to-use?)
   - [Install the plugin](#install)
   - [Install options](#install-options)
-  - [About the ReactiveLocalStorage methods](#about-reactive-local-storage-methods)
+  - [About the ReactiveWebStorage methods](#about-reactive-web-storage-methods)
   - [Use the composition API](#composition-api)
 - [Author](#author)
 - [Contributing](#contributing)
@@ -121,7 +121,7 @@ npm install vue3-reactive-storage
 
   - webStorage: Required value. localStorage, sessionStorage or other object that implements the Storage interface.
   - reactiveStorage: Required value. ref or reactive object.
-  - prefix: Optional value. Used to segment the Storage object, the prefix is added to key (using '-') in Storage object. For example:
+  - prefix: Optional value. Used to segment the Storage object, the prefix is added to key (using '-') in Storage object. Generally used when using multiple app instances. For example:
 
     ```js
     import { createApp, reactive, ref } from 'vue'
@@ -159,20 +159,20 @@ npm install vue3-reactive-storage
   - loadDataFromWebStorage: Optional value. By default is true. Loads the keys/values in Storage object to reactive object when the load event is fired by window object. Useful when closing and opening the
     browser window.
 
-- ### <a id="about-reactive-local-storage-methods"></a> About the ReactiveLocalStorage methods
+- ### <a id="about-reactive-web-storage-methods"></a> About the ReactiveWebStorage methods
 
-  The `ReactiveLocalStorage` object provides an interface similar to the Storage interface, this methods are:
+  The `ReactiveWebStorage` object provides an interface similar to the Storage interface, this methods are:
 
-  - `(getter) length`: Obtains the number of elements saved in reactiveLocalStorage.
-  - `(method) key(index)`: Returns the key in nth position into reactiveLocalStorage.
-  - `(method) getItem(key, parseOptions = {})`: Returns the parsed key's value saved into reactiveLocalStorage.
-  - `(method) setItem(key, item, serializeOptions = {})`: Saves the pair key/value into reactiveLocalStorage.
-  - `(method) removeItem(key)`: Removes the pair key/value from reactiveLocalStorage.
-  - `(method) clear()`: Removes all pairs key/value into reactiveLocalStorage.
+  - `(getter) length`: Obtains the number of elements saved in reactiveWebStorage.
+  - `(method) key(index)`: Returns the key in nth position into reactiveWebStorage.
+  - `(method) getItem(key)`: Returns the parsed key's value saved into reactiveWebStorage.
+  - `(method) setItem(key, item)`: Saves the pair key/value into reactiveWebStorage.
+  - `(method) removeItem(key)`: Removes the pair key/value from reactiveWebStorage.
+  - `(method) clear()`: Removes all pairs key/value into reactiveWebStorage.
 
   And include others methods:
 
-  - `(getter) reactiveStorageAdapter`: Returns the reactiveStorageAdapter (object that wraps the reactiveStorage using an insterface similar to Storage) object used by reactiveLocalStorage instance.
+  - `(getter) reactiveStorageAdapter`: Returns the reactiveStorageAdapter (object that wraps the reactiveStorage using an insterface similar to Storage) object used by reactiveWebStorage instance.
   - `(getter) reactiveStorage`: Returns the reactiveStorage object used by reactiveWebStorage instance.
 
 - ### <a id="composition-api"></a> Use the composition API:
