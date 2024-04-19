@@ -1,6 +1,6 @@
 {
   "name": "vue3-reactive-storage",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vue3 plugin to use reactivity with object that implements the Storage interface",
   "main": "./dist/esm/index.mjs",
   "type": "module",
