@@ -122,7 +122,7 @@ export class ReactiveWebStorage {
 
   /** Removes all pairs key/value into reactiveWebStorage. */
   clear() {
-    const length = this.#reactiveStorageAdapter.length()
+    const length = this.#reactiveStorageAdapter.length
     for (let i = 0; i < length; i++) {
       const key = this.#reactiveStorageAdapter.key(i)
       const webStorageKey = this.obtainWebStorageKey(key)
