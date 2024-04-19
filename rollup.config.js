@@ -9,13 +9,6 @@ const getOutputFile = (basePath, { outputDir, name, extension }) => {
 }
 
 // file information
-const CJS_FILE = {
-  extension: 'cjs',
-  format: 'cjs',
-  name: 'index',
-  outputDir: 'cjs',
-  babelEnvName: 'buildCommonJS',
-}
 const MJS_FILE = {
   extension: 'mjs',
   format: 'es',
@@ -36,7 +29,6 @@ const INPUT_DTS_FILE = 'dist/tmp/types/index.d.ts'
 
 // transpiled files
 const BASE_DIR = 'dist'
-const OUTPUT_CJS_FILE = getOutputFile(BASE_DIR, CJS_FILE)
 const OUTPUT_MJS_FILE = getOutputFile(BASE_DIR, MJS_FILE)
 
 // type declaration file
@@ -49,17 +41,6 @@ export default defineConfig([
   {
     input: INPUT_SRC_FILE,
     output: [
-      {
-        file: OUTPUT_CJS_FILE,
-        format: CJS_FILE.format,
-        sourcemap: true,
-        plugins: [
-          getBabelOutputPlugin({
-            configFile: BABEL_CONFIG_FILE,
-            envName: CJS_FILE.babelEnvName,
-          }),
-        ],
-      },
       {
         file: OUTPUT_MJS_FILE,
         format: MJS_FILE.format,
