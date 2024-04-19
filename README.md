@@ -206,7 +206,6 @@ npm install vue3-reactive-storage
   </template>
 
   <script setup>
-    import HelloWorld from './components/HelloWorld.vue'
     import { inject, computed } from 'vue'
 
     const storage = inject('storage')
