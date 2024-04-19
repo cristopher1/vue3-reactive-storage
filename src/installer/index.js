@@ -24,6 +24,9 @@ export class ReactiveWebStorageInstaller {
    *   interface, for example LocalStorage, SessionStorage, other.
    * @param {object} [options.reactiveStorage] An reactivity object, for example
    *   an ref or reactive object.
+   * @param {boolean} [options.loadDataFromWebStorage] Load data form Storage
+   *   object to reactive object using window.addEventListener('load') by
+   *   default is true
    */
   install(app, options) {
     const {

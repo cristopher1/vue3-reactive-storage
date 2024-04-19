@@ -50,7 +50,9 @@
     "reactivity",
     "Storage",
     "LocalStorage",
-    "SessionStorage"
+    "SessionStorage",
+    "localStorage",
+    "sessionStorage"
   ],
   "bugs": {
     "url": "https://github.com/cristopher1/vue3-reactive-storage/issues"
