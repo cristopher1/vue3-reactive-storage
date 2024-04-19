@@ -1,4 +1,4 @@
-import { ReactiveStorageError } from './Error.js'
+import { ReactiveWebStorageError } from './Error.js'
 
 export class ReactiveWebStorage {
   #prefix
@@ -7,7 +7,7 @@ export class ReactiveWebStorage {
 
   constructor(prefix, webStorage, reactiveStorageAdapter) {
     if (!webStorage || !(webStorage instanceof Storage)) {
-      throw new ReactiveStorageError(
+      throw new ReactiveWebStorageError(
         'The "webStorage" object must implement the Storage interface',
       )
     }
@@ -105,7 +105,7 @@ export class ReactiveWebStorage {
       this.#webStorage.setItem(webStorageKey, item)
       this.#reactiveStorageAdapter.setItem(key, item)
     } catch (err) {
-      throw new ReactiveStorageError(err.message, { cause: err })
+      throw new ReactiveWebStorageError(err.message, { cause: err })
     }
   }
 

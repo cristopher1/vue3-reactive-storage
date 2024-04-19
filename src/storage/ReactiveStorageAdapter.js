@@ -1,4 +1,4 @@
-import { ReactiveStorageError } from './Error.js'
+import { ReactiveWebStorageError } from './Error.js'
 import { isReactive, isRef } from 'vue'
 
 export class ReactiveStorageAdapter {
@@ -9,7 +9,7 @@ export class ReactiveStorageAdapter {
       !reactiveStorage ||
       (!isReactive(reactiveStorage) && !isRef(reactiveStorage))
     ) {
-      throw new ReactiveStorageError(
+      throw new ReactiveWebStorageError(
         '"reactiveStorage" object must be a reactive or ref object',
       )
     }

@@ -2,7 +2,7 @@
 
 import { ReactiveWebStorageFactory } from '../storage/ReactiveWebStorageFactory.js'
 
-export class ReactiveLocalStorageInstaller {
+export class ReactiveWebStorageInstaller {
   #addLoadDataFromWebStorage(window, reactiveWebStorage) {
     window.addEventListener('load', () => {
       reactiveWebStorage.loadDataFromWebStorage()

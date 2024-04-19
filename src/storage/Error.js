@@ -1,1 +1,1 @@
-export class ReactiveStorageError extends Error {}
+export class ReactiveWebStorageError extends Error {}
