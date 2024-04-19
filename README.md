@@ -16,7 +16,7 @@
 
 ### 🏠 [Homepage](https://github.com/cristopher1/vue3-reactive-storage)
 
-A Vue3 plugin to use reactivity with object that implements the Storage interface, for example: localStorage, sessionStorage or customer object. Working with one or various app instances. Based on [@cljimenez/vue-localstorage-reactive](https://www.npmjs.com/package/@cljimenez/vue-localstorage-reactive)
+A Vue3 plugin to use reactivity with object that implements the Storage interface, for example: localStorage, sessionStorage or customer object. Working with one or various app instances. Based on [@cljimenez/vue-localstorage-reactive](https://www.npmjs.com/package/@cljimenez/vue-localstorage-reactive). Include the class ReactiveWebStorageError used by ReactiveWebStorage to throw Errors.
 
 ### [Index](#index)
 
