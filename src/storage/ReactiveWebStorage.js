@@ -43,14 +43,6 @@ export class ReactiveWebStorage {
     return keyElements[keyElements - 1]
   }
 
-  get reactiveStorageAdapter() {
-    return this.#reactiveStorageAdapter
-  }
-
-  get reactiveStorage() {
-    return this.#reactiveStorageAdapter.reactiveStorage
-  }
-
   get prefix() {
     return this.#prefix
   }
