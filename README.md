@@ -95,7 +95,8 @@ npm install vue3-reactive-storage
   })
 
   const appReactiveStorage = app.config.globalProperties.$reactiveWebStorage
-  const subAppReactiveStorage = subApp.config.globalProperties.$reactiveWebStorage
+  const subAppReactiveStorage =
+    subApp.config.globalProperties.$reactiveWebStorage
   const otherSubAppReactiveStorage =
     otherSubApp.config.globalProperties.$reactiveWebStorage
 
@@ -117,43 +118,46 @@ npm install vue3-reactive-storage
   ```
 
   The options object can contain the following attributes:
-    - webStorage: Required value. localStorage, sessionStorage or other object that implements the Storage interface.
-    - reactiveStorage: Required value. ref or reactive object.
-    - prefix: Optional value. Used to segment the Storage object, the prefix is added to key (using '-') in Storage object. For example:
-      ```js
-      import { createApp, reactive, ref } from 'vue'
-      import createReactiveWebStorageInstaller from 'vue3-reactive-storage'
-      
-      import { createApp } from 'vue'
-      
-      import App from './App.vue'
-      
-      const app = createApp(App)
 
-      app.use(createReactiveWebStorageInstaller(), {
-        prefix: 'hello_world'
-        webStorage: localStorage,
-        reactiveStorage: ref({}),
-      })
+  - webStorage: Required value. localStorage, sessionStorage or other object that implements the Storage interface.
+  - reactiveStorage: Required value. ref or reactive object.
+  - prefix: Optional value. Used to segment the Storage object, the prefix is added to key (using '-') in Storage object. For example:
 
-      const appReactiveStorage = app.config.globalProperties.$reactiveWebStorage
+    ```js
+    import { createApp, reactive, ref } from 'vue'
+    import createReactiveWebStorageInstaller from 'vue3-reactive-storage'
 
-      // Adds in Storage object
-      // key: hello_world-my_key
-      // value: data
-      // Adds in reactive object
-      // key: my_key
-      // value: data
-      appReactiveStorage.setItem('my_key', 'data')
+    import { createApp } from 'vue'
 
-      app.provide('storage', appReactiveStorage)
+    import App from './App.vue'
 
-      app.mount('#app')
-      ```
-      by default, prefix is ''.
-    
-    - loadDataFromWebStorage: Optional value. By default is true. Loads the keys/values in Storage object to reactive object when the load event is fired by window object. Useful when closing and opening the 
-      browser window.
+    const app = createApp(App)
+
+    app.use(createReactiveWebStorageInstaller(), {
+      prefix: 'hello_world'
+      webStorage: localStorage,
+      reactiveStorage: ref({}),
+    })
+
+    const appReactiveStorage = app.config.globalProperties.$reactiveWebStorage
+
+    // Adds in Storage object
+    // key: hello_world-my_key
+    // value: data
+    // Adds in reactive object
+    // key: my_key
+    // value: data
+    appReactiveStorage.setItem('my_key', 'data')
+
+    app.provide('storage', appReactiveStorage)
+
+    app.mount('#app')
+    ```
+
+    by default, prefix is ''.
+
+  - loadDataFromWebStorage: Optional value. By default is true. Loads the keys/values in Storage object to reactive object when the load event is fired by window object. Useful when closing and opening the
+    browser window.
 
 - ### <a id="about-reactive-local-storage-methods"></a> About the ReactiveLocalStorage methods
 
@@ -201,20 +205,23 @@ npm install vue3-reactive-storage
   // you can use the inject function to access to the reactiveWebStorage.
   <template>
     <h2>{{ getUsername }}</h2>
-    <button @click="storage.setItem('username', 'an username')">Add username</button>
+    <button @click="storage.setItem('username', 'an username')">
+      Add username
+    </button>
     <button @click="storage.removeItem('username')">Delete username</button>
   </template>
 
   <script setup>
-    import { inject, computed } from 'vue'
+  import { inject, computed } from 'vue'
 
-    const storage = inject('storage')
+  const storage = inject('storage')
 
-    const getUsername = computed(() => {
-      return storage.getItem('username')
-    })
+  const getUsername = computed(() => {
+    return storage.getItem('username')
+  })
   </script>
   ```
+
 ## <a id="author"></a> Author
 
 👤 **Cristopher Jiménez Meza**
