@@ -40,7 +40,7 @@ export class ReactiveWebStorage {
    */
   obtainReactiveStorageAdapterKey(key) {
     const keyElements = key.split('-')
-    return keyElements.at(-1)
+    return keyElements[keyElements - 1]
   }
 
   get reactiveStorageAdapter() {
@@ -62,7 +62,7 @@ export class ReactiveWebStorage {
    * @readonly
    */
   get length() {
-    return super.length
+    return this.#reactiveStorageAdapter.length
   }
 
   /**
@@ -72,7 +72,7 @@ export class ReactiveWebStorage {
    * @returns {string} The key in nth position.
    */
   key(index) {
-    return super.key(index)
+    return this.#reactiveStorageAdapter.key(index)
   }
 
   /**
@@ -87,7 +87,7 @@ export class ReactiveWebStorage {
       const webStorageKey = this.obtainWebStorageKey(key)
       value = this.#webStorage.getItem(webStorageKey)
       if (value) {
-        super.setItem(key, value)
+        this.#reactiveStorageAdapter.setItem(key, value)
       }
     }
     return value
@@ -141,10 +141,10 @@ export class ReactiveWebStorage {
     for (let index = 0; index < length; ++index) {
       const webStorageKey = this.#webStorage.key(index)
       if (this.#isWebStorageKey(webStorageKey)) {
+        const value = this.#webStorage.getItem(webStorageKey)
         const reactiveStorageAdapterKey =
           this.obtainReactiveStorageAdapterKey(webStorageKey)
-        const value = this.#webStorage.getItem(reactiveStorageAdapterKey)
-        super.setItem(reactiveStorageAdapterKey, value)
+        this.#reactiveStorageAdapter.setItem(reactiveStorageAdapterKey, value)
       }
     }
   }
