@@ -70,7 +70,7 @@ jobs:
       - name: download vue3-reactive-storage distribuible
         uses: actions/download-artifact@v4
         with:
-          name: distributable-vue3-reactive-storage vue3 plugin
+          name: distributable-vue3-reactive-storage
 
       - uses: actions/setup-node@v4
         with:
