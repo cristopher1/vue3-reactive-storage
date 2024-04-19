@@ -2,13 +2,12 @@
   "name": "vue3-reactive-storage",
   "version": "1.0.0",
   "description": "Vue3 plugin to use reactivity with object that implements the Storage interface",
-  "main": "./dist/cjs/index.cjs",
+  "main": "./dist/esm/index.mjs",
   "type": "module",
   "types": "./dist/types/index.d.ts",
   "exports": {
     "types": "./dist/types/index.d.ts",
-    "import": "./dist/esm/index.mjs",
-    "require": "./dist/cjs/index.cjs"
+    "import": "./dist/esm/index.mjs"
   },
   "files": [
     "dist"
@@ -36,7 +35,7 @@
     "build:tsc": "tsc",
     "prebuild": "npm run lint:build-stage && npm run format:build-stage:fix && npm run build:clean",
     "build": "npm run build:tsc && npm run build:bundle && npm run build:clean-dist-tmp",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose",
+    "test": "jest --verbose",
     "commitlint": "npx commitlint --edit",
     "lint-staged": "npx lint-staged",
     "prepublishOnly": "npm run build",

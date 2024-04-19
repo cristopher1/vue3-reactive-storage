@@ -1,14 +1,13 @@
 {
   "env": {
-    "buildCommonJS": {
-      "presets": ["@babel/preset-env"],
-      "comments": false,
-      "plugins": [
+    "test": {
+      "presets": [
         [
-          "@babel/plugin-transform-runtime",
+          "@babel/preset-env",
           {
-            "corejs": 3,
-            "version": "^7.22.15"
+            "targets": {
+              "node": "current"
+            }
           }
         ]
       ]
