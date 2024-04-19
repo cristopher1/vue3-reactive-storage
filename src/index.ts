@@ -1,2 +1,5 @@
 export * from './globals/index.ts'
+export { ReactiveWebStorageError } from './storage/Error.js'
+export { ReactiveStorageAdapter } from './storage/ReactiveStorageAdapter.js'
+export { ReactiveWebStorage } from './storage/ReactiveWebStorage.js'
 export { createInstaller } from './main.js'
