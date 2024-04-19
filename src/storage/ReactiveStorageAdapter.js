@@ -16,6 +16,10 @@ export class ReactiveStorageAdapter {
     this.#reactiveStorage = reactiveStorage
   }
 
+  get reactiveStorage() {
+    return this.#reactiveStorage
+  }
+
   #obtainReactiveStorageValue() {
     const reactiveStorage = this.#reactiveStorage
     return isRef(reactiveStorage) ? reactiveStorage.value : reactiveStorage
