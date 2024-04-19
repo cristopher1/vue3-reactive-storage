@@ -6,6 +6,6 @@ import { ReactiveWebStorageInstaller } from './installer'
  * @returns {ReactiveWebStorageInstaller} The installer object that will install
  *   this plugin.
  */
-export function createInstaller() {
+export default function createReactiveWebStorageInstaller() {
   return new ReactiveWebStorageInstaller()
 }
