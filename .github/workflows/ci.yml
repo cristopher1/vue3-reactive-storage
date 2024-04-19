@@ -1,0 +1,37 @@
+# Workflow to use continuous integration
+
+name: CI
+
+on:
+  push:
+    branches:
+      - development
+      - main
+  pull_request:
+    branches:
+      - development
+
+jobs:
+  test_and_build:
+    name: Test the source code and build the vue3-reactive-storage vue3 plugin
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: install dependencies using package-lock.json
+        run: npm ci
+
+      - name: audit
+        run: npm audit
+
+      - name: run linter, formatter and unit tests
+        run: |
+          npm run lint
+          npm run format
+          npm run test
+
+      - name: build the dist folder
+        run: npm run build
