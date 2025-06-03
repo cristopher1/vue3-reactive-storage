@@ -40,7 +40,7 @@ export class ReactiveWebStorage {
    */
   obtainReactiveStorageAdapterKey(key) {
     const keyElements = key.split('-')
-    return keyElements[keyElements - 1]
+    return keyElements[keyElements.length - 1]
   }
 
   get reactiveStorageAdapter() {
