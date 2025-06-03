@@ -2,6 +2,10 @@
 
 Vue3 plugin to use localStorage, sessionStorage or other object that implements the Storage interface with reactivity.
 
+**Features added in version 1.0.2**
+
+- Fix loading from web storage not working.
+
 **Features added in version 1.0.1**
 
 - Documentation fixed.
